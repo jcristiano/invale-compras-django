@@ -315,3 +315,6 @@ fabric.properties
 # profiling data
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,python,django
+
+docker/compose/volume
+docker/compose/.env
