@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:10.4
+    environment:
+      POSTGRES_PASSWORD: ${IV_FINCON_DEV_POSTGRES_PASSWORD}
+      POSTGRES_USER: ${IV_FINCON_DEV_POSTGRES_USER}
+    ports:
+      - "15432:5432"
+    volumes:
+      - ./volume/pgdata:/var/lib/postgresql/data
+      - ./sql/db.sql:/docker-entrypoint-initdb.d/001-db.sql
+    networks:
+      - fincon-dev-network
+
+  pgadmin:
+    image: fenglc/pgadmin4
+    environment:
+      DEFAULT_USER: ${IV_FINCON_DEV_ADMIN_USER}
+      DEFAULT_PASSWORD: ${IV_FINCON_DEV_ADMIN_PASSWORD}
+    ports:
+      - "16543:5050"
+    depends_on:
+      - postgres
+    networks:
+      - fincon-dev-network
+
+networks:
+  fincon-dev-network:
+    driver: bridge
