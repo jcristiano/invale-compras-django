@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'controle_compras.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('IV_FINCON_DATABASE_NAME', 'django'),
+        'USER': os.getenv('IV_FINCON_DATABASE_USER', 'django'),
+        'PASSWORD': os.getenv('IV_FINCON_DATABASE_PASSWORD', 'django'),
+        'HOST': os.getenv('IV_FINCON_DATABASE_HOST', 'localhost'),
+        'PORT': os.getenv('IV_FINCON_DATABASE_PORT', '15432'),
     }
 }
 
